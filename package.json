@@ -1,5 +1,5 @@
 {
-  "name": "node-js-getting-started",
+  "name": "node-heroku",
   "version": "0.3.0",
   "description": "A sample Node.js app using Express 4",
   "engines": {
@@ -22,7 +22,8 @@
   },
   "devDependencies": {
     "request": "^2.81.0",
-    "tape": "^4.7.0"
+    "tape": "^4.7.0",
+    "nodemon": "^2.0.13"
   },
   "repository": {
     "type": "git",
