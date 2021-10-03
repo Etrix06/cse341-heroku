@@ -10,7 +10,13 @@ router.get('/', shopController.getIndex);
 
 router.get('/products', shopController.getProducts);
 
+router.get('/products/:productId', shopController.getProduct);  // the colon signals to express that it is not a route
+
 router.get('/cart', shopController.getCart);
+
+router.post('/cart', shopController.postCart);
+
+router.post('/cart-delete-item', shopController.postCartDeleteProduct);
 
 router.get('/orders', shopController.getOrders);
 

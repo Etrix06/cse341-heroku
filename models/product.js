@@ -1,6 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 
+const Cart = require('./cart');
+
 const p = path.join(
   path.dirname(process.mainModule.filename),
   'data',
@@ -18,7 +20,8 @@ const getProductsFromFile = cb => {
 };
 
 module.exports = class Product {
-  constructor(title, imageUrl, description, price) {
+  constructor(id, title, imageUrl, description, price) {
+    this.id = id;
     this.title = title;
     this.imageUrl = imageUrl;
     this.description = description;
@@ -26,11 +29,34 @@ module.exports = class Product {
   }
 
   save() {
-    this.id = Math.random().toString();
     getProductsFromFile(products => {
-      products.push(this);
-      fs.writeFile(p, JSON.stringify(products), err => {
-        console.log(err);
+      if (this.id) {
+        const existingProductIndex = products.findIndex(
+          prod => prod.id === this.id
+        );
+        const updatedProducts = [...products];
+        updatedProducts[existingProductIndex] = this;   
+        fs.writeFile(p, JSON.stringify(updatedProducts), err => {
+          console.log(err);
+        });
+      } else {
+        this.id = Math.random().toString();  // this can generate a random number for a unique id
+        products.push(this);
+        fs.writeFile(p, JSON.stringify(products), err => {
+          console.log(err);
+        });
+      }
+    });
+  }
+
+  static deleteById(id) {
+    getProductsFromFile(products => {
+      const product = products.find(prod => prod.id === id);
+      const updatedProducts = products.filter(prod => prod.id !== id); // loops thorugh all products until it find product that exactly matches id.
+      fs.writeFile(p, JSON.stringify(updatedProducts), err => {
+        if (!err) {
+          Cart.deleteProduct(id, product.price);
+        }
       });
     });
   }
@@ -38,4 +64,13 @@ module.exports = class Product {
   static fetchAll(cb) {
     getProductsFromFile(cb);
   }
+
+
+  static findById(id, cb) {
+    getProductsFromFile(products => {
+      const product = products.find(p => p.id === id);  // shortcut arrow function if 1 line and returns line.
+      cb(product);
+    });
+  }
+
 };
