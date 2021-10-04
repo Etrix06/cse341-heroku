@@ -18,12 +18,13 @@
     "express": "^4.17.1",
     "express-handlebars": "^3.0.2",
     "nodemon": "^2.0.13",
-    "pug": "^2.0.4"
+    "pug": "^2.0.4",
+    "sequelize": "^6.6.5"
   },
   "devDependencies": {
+    "nodemon": "^2.0.13",
     "request": "^2.81.0",
-    "tape": "^4.7.0",
-    "nodemon": "^2.0.13"
+    "tape": "^4.7.0"
   },
   "repository": {
     "type": "git",
