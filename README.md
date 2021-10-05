@@ -5,3 +5,5 @@ This will be my academind/heroku code.  I will use this for the academind videos
 
 # heroku
 app in heroku called project 341
+
+So this should have updated heroku git
