@@ -19,6 +19,7 @@
     "express": "^4.17.1",
     "express-handlebars": "^3.0.2",
     "mongodb": "^4.1.2",
+    "mongoose": "^6.0.10",
     "mysql2": "^2.3.0",
     "nodemon": "^2.0.13",
     "pug": "^2.0.4",

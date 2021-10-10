@@ -1,28 +1,20 @@
 const path = require('path');
-
-const cors = require('cors');
-
 const express = require('express');
 const bodyParser = require('body-parser');
-
+const mongoose = require('mongoose');
 const errorController = require('./controllers/error');
-const mongoConnect = require('./util/database').mongoConnect;
 const User = require('./models/user');
-
+const cors = require('cors');
 const app = express();
-
 app.set('view engine', 'ejs');
 app.set('views', 'views');
-
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
-
 const corsOptions = {
   origin: "https://https://project341.herokuapp.com/",
   optionsSuccessStatus: 200
 };
 app.use(cors(corsOptions));
-
 const options = {
   useUnifiedTopology: true,
   useNewUrlParser: true,
@@ -37,9 +29,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req, res, next) => {
-  User.findById('615f98eb0518a0323fc89c9b')
+  User.findById('61625fcd7b05f286b2a85bd3')
     .then(user => {
-      req.user = new User(user.name, user.email, user.cart, user._id);
+      req.user = user;
       next();
     })
     .catch(err => console.log(err));
@@ -50,8 +42,26 @@ app.use(shopRoutes);
 
 app.use(errorController.get404);
 
-mongoConnect(() => {
-  app.listen(process.env.PORT || 3000);
-  console.log('listening on 3000');
-});
+mongoose
+  .connect(
+    'mongodb+srv://etrix06:88qunwMxH3OSBV2s@cluster0.x7q6a.mongodb.net/shop?retryWrites=true&w=majority')
+  .then(result => {
+    User.findOne().then(user => {
+      if (!user) {
+        const user = new User({
+          name: 'Erik',
+          email: 'erik@test.com',
+          cart: {
+            items: []
+          }
+        });
+        user.save();
+      }
+    });
+    app.listen(process.env.PORT || 3000);
+    console.log('listening on 3000');
+  })
+  .catch(err => {
+    console.log(err);
+  });
 
