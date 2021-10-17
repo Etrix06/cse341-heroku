@@ -92,7 +92,7 @@ exports.postSignup = (req, res, next) => {
             to: email,
             from: 'alc18005@byui.edu',
             subject: 'Signup succeeded!',
-            html: '<h1>You successfully signed up!</h1>'            
+            html: '<h1>You successfully signed up to Heroku Shop!</h1>'            
           }); 
         })
         .catch(err => {
