@@ -20,7 +20,7 @@
                                 </div>
                                 <div class="card__content">
                                     <h2 class="product__price">$
-                                        <%= product.price %>
+                                        <%= product.price.toFixed(2) %>
                                     </h2>
                                     <p class="product__description">
                                         <%= product.description %>
@@ -30,6 +30,7 @@
                                     <a href="/admin/edit-product/<%= product._id %>?edit=true" class="btn">Edit</a>
                                     <form action="/admin/delete-product" method="POST">
                                         <input type="hidden" value="<%= product._id %>" name="productId">
+                                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                                         <button class="btn" type="submit">Delete</button>
                                     </form>
 
