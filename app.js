@@ -11,7 +11,7 @@ const errorController = require('./controllers/error');
 const User = require('./models/user');
 const cors = require('cors');
 
-const MONGODB_URI =   'mongodb+srv://etrix06:88qunwMxH3OSBV2s@cluster0.x7q6a.mongodb.net/herokushop';
+const MONGODB_URI =   process.env.MONGODB_URI;
 const app = express();
 const store = new MongoDBStore({
   uri: MONGODB_URI,
@@ -38,7 +38,7 @@ const options = {
   family: 4
 };
 
-const MONGODB_URL = process.env.MONGODB_URL || "mongodb+srv://etrix06:88qunwMxH3OSBV2s@cse341cluster-3dwlw.mongodb.net/herokushop?retryWrites=true&w=majority";
+const MONGODB_URL = process.env.MONGODB_URL || process.env.MONGODB_URI;
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
