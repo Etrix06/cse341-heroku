@@ -30,7 +30,7 @@
     "nodemailer": "^6.7.0",
     "nodemailer-sendgrid-transport": "^0.2.0",
     "nodemon": "^2.0.13",
-    "pug": "^2.0.4",
+    "pug": "^3.0.2",
     "sequelize": "^6.6.5"
   },
   "devDependencies": {
