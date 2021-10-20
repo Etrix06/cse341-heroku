@@ -12,7 +12,7 @@ const errorController = require('./controllers/error');
 const User = require('./models/user');
 const cors = require('cors');
 
-const MONGODB_URI =   process.env.MONGODB_URI;
+const MONGODB_URI = process.env.MONGODB_URI;
 const app = express();
 const store = new MongoDBStore({
   uri: MONGODB_URI,
