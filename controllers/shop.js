@@ -42,7 +42,7 @@ exports.getProduct = (req, res, next) => {
       .then(products => {
         res.render('shop/shop', {
           prods: products,
-          pageTitle: 'Alcala Shop',
+          pageTitle: 'Heroku Shop',
           path: '/shop'
         });
       })
@@ -58,7 +58,7 @@ exports.getIndex = (req, res, next) => {
     .then(products => {
       res.render('shop/index', {
         prods: products,
-        pageTitle: 'Alcala Shop',
+        pageTitle: 'Heroku Shop',
         path: '/'
       });
     })
