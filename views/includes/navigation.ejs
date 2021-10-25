@@ -36,7 +36,10 @@
                     <a class="<%= path === '/signup' ? 'active' : '' %>" href="/signup">Signup</a>
                 </li>
                 <% } else { %>
+                <li class="main-header__item" style="color: skyblue">Welcome </li>
+                <li class="main-header__item" style="color: skyblue"><%=  %></li>
                 <li class="main-header__item" style="list-style: none;">
+                    
                     <form action="/logout" method="post">
                         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                         <button type="submit">Logout</button>

@@ -9,6 +9,8 @@ const router = express.Router();
 
 router.get('/', shopController.getIndex);
 
+router.get('/shop', shopController.getShop); // Added afterwards
+
 router.get('/products', shopController.getProducts);
 
 router.get('/products/:productId', shopController.getProduct);  // the colon signals to express that it is not a route
