@@ -26,12 +26,12 @@ const fileStorage = multer.diskStorage({
     cb(null, 'images');
   },
   filename: (req, file, cb) => {
-    cb(null, file.filename + '-' + file.originalname );
+    cb(null, file.filename/*new Date().toISOString()*/ + '-' + file.originalname );
   }
 });
 
 const fileFilter = (req, file, cb) => {
-  if (file.mimetype === 'image/png' || file.mimetype === 'image/jpg' || file.mimetype === 'image/jpge') {
+  if (file.mimetype === 'image/png' || file.mimetype === 'image/jpg' || file.mimetype === 'image/jpeg') {
     cb(null, true);
   } else {
     cb(null, false);
@@ -61,6 +61,7 @@ const MONGODB_URL = process.env.MONGODB_URL || process.env.MONGODB_URI;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(multer({storage: fileStorage, fileFilter: fileFilter }).single('image'));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/images',express.static(path.join(__dirname, 'images')));
 app.use(
   session({ 
     secret: 'my secret',   /* This is not the most secure way, needs to be more random */
